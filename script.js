@@ -2,6 +2,8 @@ window.addEventListener('load', function() {
     const canvas = document.getElementById('canvas1');
     const ctx = canvas.getContext('2d');
     const fullScreenButton = document.getElementById('fullScreenButton');
+    const backGroundSound = new Audio('forest-wind-and-birds-6881.mp3');
+    const jumpSound = new Audio('sfx_jump.mp3');
     canvas.width = 1200;
     canvas.height = 720;
     let enemies = [];
@@ -108,6 +110,7 @@ window.addEventListener('load', function() {
                 this.velocityX = 0;
             }
             if((input.keys.indexOf('ArrowUp') > -1 || input.keys.indexOf('swipe up') > -1) && this.onGround()) {
+                jumpSound.play();
                 this.velocityY -= 32;
             }
             // Move Horizontally
@@ -258,6 +261,8 @@ window.addEventListener('load', function() {
     let randomEnemyInterval = Math.random() * 1000 + 1000;
 
     function animate(timeStamp){
+        backGroundSound.play();
+        backGroundSound.loop = true;
         const deltaTime = timeStamp - lastTime;
         lastTime = timeStamp;
         ctx.clearRect(0,0,canvas.width, canvas.height);
